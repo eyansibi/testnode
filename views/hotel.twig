@@ -1,0 +1,38 @@
+{% extends 'layout.twig' %}
+
+{% block body%}
+<h1>{{title}}</h1>
+<form action="hotel/create" method="post">
+    <label for="hotel">Add a hotel</label>
+    <input type="text" name="name" placeholder="Add a name"/>
+    <input type="text" name="date" placeholder="Add a date"/>
+    <input type="text" name="nbrrooms" placeholder="Add a nbr_Rooms"/>
+
+    <input type="submit" value="Save">
+</form>
+
+{% for hotel in hotels %}
+<div id="hotel-{{ hotel.id }}" style="margin: 10px 0; padding: 10px; border: 1px solid #ccc;">
+    <!-- Hotel Content -->
+    <h3>{{ hotel.name }}</h3>
+    <h3>{{ hotel.fabricationDate }}</h3>
+    <h3>{{ hotel.nbrRooms }}</h3>
+
+
+    <!-- Delete Button -->
+    <form action="hotel/delete/{{ hotel.id }}" method="post" style="display: inline;">
+        <button type="submit" style="background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+            Delete
+        </button>
+    </form>
+
+    <!-- Update Form -->
+    <form action="hotel/update/{{ hotel.id }}" method="post" style="display: inline; margin-left: 10px;">
+        <input type="text" name="updatedHotel" placeholder="Update Hotel" style="margin-right: 5px;" />
+        <button type="submit" style="background-color: green; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+            Update
+        </button>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

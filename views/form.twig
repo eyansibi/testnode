@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %}
+
+{% block body%}
+<h1>{{title}}</h1>
+<form action="form/create" method="post">
+    <label for="comment">Add a comment</label>
+    <input type="text" name="comment" placeholder="Add a comment"/>
+    <input type="submit" value="Save">
+</form>
+
+{% for comment in comments %}
+<div id="comment-{{ comment.id }}" style="margin: 10px 0; padding: 10px; border: 1px solid #ccc;">
+    <!-- Comment Content -->
+    <h3>{{ comment.title }}</h3>
+
+    <!-- Delete Button -->
+    <form action="form/delete/{{ comment.id }}" method="post" style="display: inline;">
+        <button type="submit" style="background-color: red; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+            Delete
+        </button>
+    </form>
+
+    <!-- Update Form -->
+    <form action="form/update/{{ comment.id }}" method="post" style="display: inline; margin-left: 10px;">
+        <input type="text" name="updatedComment" placeholder="Update comment" style="margin-right: 5px;" />
+        <button type="submit" style="background-color: green; color: white; border: none; padding: 5px 10px; cursor: pointer;">
+            Update
+        </button>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}
